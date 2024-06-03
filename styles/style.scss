@@ -1,1 +1,75 @@
+@use "../styles/mixin" as m;
+@use "../styles/variables.scss" as v;
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  @include m.flexCenter;
+  height: 100vh;
+  width: 100vw;
+  background: rgb(69, 98, 252);
+  background: linear-gradient(
+    180deg,
+    rgba(69, 98, 252, 1) 0%,
+    rgba(69, 251, 251, 1) 100%
+  );
+}
+.weather-container {
+  @include m.flexCenter;
+  flex-direction: column;
+}
+.loading-icon {
+  width: 100%;
+  max-width: 300px;
+}
+.input-btn-container {
+  @include m.flexCenter;
+  height: 120px;
+  flex-direction: row;
+  background-color: #fcffe7c0;
+  border-radius: 30px;
+}
+.input-box {
+  @include m.inputBtn;
+  width: 100%;
+  max-width: 300px;
+  height: 70px;
+  background-color: v.$secondary-color;
+  font-size: 25px;
+  color: v.$main-color;
+}
+::placeholder {
+  color: v.$main-color;
+  letter-spacing: 2px;
+}
 
+h1 {
+  font-size: 80px;
+  color: v.$main-color;
+  letter-spacing: 2px;
+  margin: 10px 0px 0px;
+  font-weight: 300;
+}
+h2 {
+  color: v.$secondary-color;
+  font-size: 70px;
+  letter-spacing: 2px;
+  margin: 0;
+  font-weight: 300;
+}
+.fa-magnifying-glass {
+  width: 100px;
+  height: 70px;
+  background-color: v.$secondary-color;
+  color: v.$main-color;
+  @include m.inputBtn;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+.fa-magnifying-glass:hover {
+  background-color: #c3a304;
+}
+.hide {
+  display: none;
+}

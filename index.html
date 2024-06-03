@@ -3,9 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="icon" type="images/favicon" href="/images/favicon.ico" />
+    <script
+      src="https://kit.fontawesome.com/a2c3cb34bc.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Weather App</title>
   </head>
   <body>
-    <section></section>
+    <div class="weather-container">
+      <img
+        class="loading-icon"
+        src="images/Weather.png"
+        alt="Sunny and cloudy picture"
+      />
+      <div class="input-btn-container">
+        <input
+          type="text"
+          placeholder="Enter your location"
+          class="input-box"
+          id="input-box"
+          required
+        />
+        <button
+          id="search-btn"
+          class="fa-solid fa-magnifying-glass fa-lg"
+        ></button>
+      </div>
+      <h1>Weather</h1>
+      <h2>Forecasts</h2>
+    </div>
+    <script src="script.js"></script>
   </body>
 </html>
