@@ -16,11 +16,13 @@ body {
     rgba(69, 251, 251, 1) 100%
   );
 }
+.landing-container,
 .weather-container {
   @include m.flexCenter;
   flex-direction: column;
+  text-align: center;
 }
-.loading-icon {
+.landing-icon {
   width: 100%;
   max-width: 300px;
 }
@@ -47,6 +49,7 @@ body {
 
 h1 {
   font-size: 80px;
+  text-align: center;
   color: v.$main-color;
   letter-spacing: 2px;
   margin: 10px 0px 0px;
@@ -72,6 +75,46 @@ h2 {
   background-color: #c3a304;
 }
 
+/*error message*/
+.error-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+  background-color: rgb(84, 103, 116, 0.8);
+  padding: 20px;
+  border-radius: 30px;
+  margin-top: 20px;
+
+  h4 {
+    font-size: 20px;
+    color: v.$main-color;
+    letter-spacing: 2px;
+    width: 100%;
+    max-width: 320px;
+    padding: 0 20px;
+  }
+}
+
+/*Weekly weather*/
+.weekly-container {
+  @include m.flexCenter;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+  height: 150px;
+  background-color: rgba(249, 255, 242, 0.4);
+  div {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    height: 150px;
+    justify-content: space-around;
+    align-content: baseline;
+    padding-top: 20px;
+  }
+}
 /*Using these codes in JavaScript */
 .hide {
   display: none;
