@@ -105,8 +105,10 @@ h2 {
   max-width: 900px;
   height: 150px;
   background-color: rgba(249, 255, 242, 0.4);
-  div {
+
+  .weekly-box {
     display: flex;
+    flex-direction: column;
     width: 100%;
     max-width: 900px;
     height: 150px;

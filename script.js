@@ -8,6 +8,8 @@ const weatherContainer = document.querySelector(".weather-container");
 const errorMessage = document.querySelector(".error-container");
 const weeklyContainer = document.querySelector(".weekly-container");
 const weeklyDates = document.querySelectorAll(".weekly-date");
+const weeklyImg = document.querySelectorAll(".weekly-img");
+const weeklyTemp = document.querySelectorAll(".weekly-temp");
 const today = new Date();
 const month = today.getMonth();
 const date = today.getDate();
@@ -25,20 +27,44 @@ const monthNames = [
   "November",
   "December",
 ];
-
+const apiKey = "1e958d572843603c370ad31bc6fbfda2";
 //Weekly weather
 async function weeklyWeather(lat, lon) {
-  const apiKey = "1e958d572843603c370ad31bc6fbfda2";
-  const api = `http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  const api = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  try {
+    const response = await fetch(api);
+    if (!response) {
+      throw new Error("City not found!");
+    }
+    const weatherData = await response.json();
+    if (weatherData && weatherData.list) {
+      for (let i = 0; i < 7; i++) {
+        console.log([i]);
+        const days = weatherData.list[i];
+        const date = new Date().toLocaleDateString();
+        const iconCode = `${days.weather[0].icon}`;
+        const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
+        const data = `${Math.round(days.main.temp - 273.15)} ℃ / ${Math.round(
+          1.8 * (days.main.temp - 273) + 32
+        )} °F`;
+        weeklyImg[i].src = iconUrl;
+        weeklyTemp[i].innerHTML = data;
+        weeklyDates[i].innerHTML = date;
 
-  const response = await fetch(api)
-    .then((response) => response.json())
-    .then((data) => {
-      for (let i = 0; i < 7; i++) {}
-    });
+        console.log(`day:${days}`);
+        console.log(`date:${date}`);
+        console.log(`temp:${temp}`);
+      }
+      weeklyContainer.style.display = "block";
+    } else {
+      console.log(error.message);
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
 }
+
 async function weatherApi(city) {
-  const apiKey = "1e958d572843603c370ad31bc6fbfda2";
   const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
   try {
@@ -78,6 +104,8 @@ async function weatherApi(city) {
     weatherContainer.appendChild(weatherState);
 
     console.log(weatherData);
+    weeklyWeather(weatherData.coord.lat, weatherData.coord.lon);
+
     // No enter any words
   } catch (error) {
     errorMessage.style.display = "flex";
@@ -95,6 +123,7 @@ function showingCss() {
 
 searchBtn.addEventListener("click", () => {
   showingCss();
+
   errorMessage.style.display = "none";
   weatherApi(inputBox.value);
 });
