@@ -98,23 +98,32 @@ h2 {
 
 /*Weekly weather*/
 .weekly-container {
-  @include m.flexCenter;
+  display: none;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
   gap: 20px;
   width: 100%;
   max-width: 900px;
   height: 150px;
+  margin-top: 20px;
   background-color: rgba(249, 255, 242, 0.4);
 
   .weekly-box {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 900px;
+
     height: 150px;
     justify-content: space-around;
     align-content: baseline;
     padding-top: 20px;
+  }
+  .weekly-date {
+    text-align: center;
+    color: v.$main-color;
+  }
+  .weekly-img {
+    width: 130px;
   }
 }
 /*Using these codes in JavaScript */

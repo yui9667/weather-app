@@ -9,7 +9,6 @@ const errorMessage = document.querySelector(".error-container");
 const weeklyContainer = document.querySelector(".weekly-container");
 const weeklyDates = document.querySelectorAll(".weekly-date");
 const weeklyImg = document.querySelectorAll(".weekly-img");
-const weeklyTemp = document.querySelectorAll(".weekly-temp");
 const today = new Date();
 const month = today.getMonth();
 const date = today.getDate();
@@ -39,23 +38,20 @@ async function weeklyWeather(lat, lon) {
     const weatherData = await response.json();
     if (weatherData && weatherData.list) {
       for (let i = 0; i < 7; i++) {
-        console.log([i]);
+        weeklyImg[i].src = "";
+        weeklyDates[i].innerHTML = "";
         const days = weatherData.list[i];
-        const date = new Date().toLocaleDateString();
+        const nextSevenDays = new Date(today.setDate(today.getDate() + 1));
+        const options = { month: "numeric", day: "numeric" };
+        const newOptions = nextSevenDays.toLocaleDateString("en-US", options);
         const iconCode = `${days.weather[0].icon}`;
         const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
-        const data = `${Math.round(days.main.temp - 273.15)} ℃ / ${Math.round(
-          1.8 * (days.main.temp - 273) + 32
-        )} °F`;
-        weeklyImg[i].src = iconUrl;
-        weeklyTemp[i].innerHTML = data;
-        weeklyDates[i].innerHTML = date;
 
-        console.log(`day:${days}`);
-        console.log(`date:${date}`);
-        console.log(`temp:${temp}`);
+        weeklyImg[i].src = iconUrl;
+        weeklyDates[i].innerHTML = newOptions;
+        weeklyContainer.style.display = "flex";
       }
-      weeklyContainer.style.display = "block";
+      newOptions = "";
     } else {
       console.log(error.message);
     }
@@ -104,6 +100,7 @@ async function weatherApi(city) {
     weatherContainer.appendChild(weatherState);
 
     console.log(weatherData);
+
     weeklyWeather(weatherData.coord.lat, weatherData.coord.lon);
 
     // No enter any words
