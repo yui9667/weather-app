@@ -30,18 +30,23 @@ const apiKey = "1e958d572843603c370ad31bc6fbfda2";
 //Weekly weather
 async function weeklyWeather(lat, lon) {
   const api = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  let shouldContinue = true;
+  const WeeklyToday = new Date();
   try {
     const response = await fetch(api);
     if (!response) {
       throw new Error("City not found!");
     }
+
     const weatherData = await response.json();
+
     if (weatherData && weatherData.list) {
       for (let i = 0; i < 7; i++) {
-        weeklyImg[i].src = "";
-        weeklyDates[i].innerHTML = "";
+        if (!shouldContinue) break;
         const days = weatherData.list[i];
-        const nextSevenDays = new Date(today.setDate(today.getDate() + 1));
+        const nextSevenDays = new Date(
+          WeeklyToday.setDate(WeeklyToday.getDate() + 1)
+        );
         const options = { month: "numeric", day: "numeric" };
         const newOptions = nextSevenDays.toLocaleDateString("en-US", options);
         const iconCode = `${days.weather[0].icon}`;
@@ -51,7 +56,6 @@ async function weeklyWeather(lat, lon) {
         weeklyDates[i].innerHTML = newOptions;
         weeklyContainer.style.display = "flex";
       }
-      newOptions = "";
     } else {
       console.log(error.message);
     }
@@ -75,7 +79,7 @@ async function weatherApi(city) {
     //Spell error
     if (weatherData.cod === `404`) {
       errorMessage.style.display = "flex";
-
+      weeklyContainer.style.display = "none";
       return;
     }
     const currentDate = document.createElement("h3");
