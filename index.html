@@ -38,12 +38,33 @@
       <h1>Weather</h1>
       <h2>Forecasts</h2>
     </div>
-    <div class="weather-container"></div>
+    <!--This is for today's weather-->
+    <div class="weather-container">
+      <h2 class="date"></h2>
+      <h2 class="place"></h2>
+      <div class="main-container">
+        <div class="img-box">
+          <img
+            class="weather-img"
+            src=""
+            alt="weather img (data comes from JS)"
+          />
+        </div>
+        <div class="detail-box">
+          <h3 class="description"></h3>
+          <h3 class="temp"></h3>
+          <h4 class="wind"></h4>
+          <h4 class="humidity"></h4>
+        </div>
+      </div>
+    </div>
+
     <!--This is for error message-->
     <div class="error-container">
       <h4>Something is wrong! Please enter location again!</h4>
-      <img src="images/error.png" alt="a boy with raining" />
+      <img class="error-img" src="images/error.png" alt="a boy with raining" />
     </div>
+    <!--This is fot weekly weather -->
     <div class="weekly-container">
       <div class="weekly-box">
         <div class="weekly-date">date</div>
