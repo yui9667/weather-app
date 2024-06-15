@@ -90,17 +90,6 @@ async function weatherApi(city) {
       weatherContainer.style.display = "none";
       return;
     }
-    //const currentDate = document.createElement("h3");
-    //const location = document.createElement("h1");
-    //location.style.fontSize = "60px"
-    //const temp = document.createElement("h3");
-    //const weatherState = document.createElement("h3");
-    //const weatherIcon = document.createElement("img");
-    // weatherContainer.appendChild(currentDate);
-    // weatherContainer.appendChild(place);
-    // weatherContainer.appendChild(weatherImg);
-    // weatherContainer.appendChild(temp);
-    // weatherContainer.appendChild(description);
 
     temp.innerHTML = `${Math.round(
       weatherData.main.temp - 273.15
@@ -131,6 +120,15 @@ function showingCss() {
   inputBox.classList.add("input-box2");
   searchBtn.classList.add("search-btn2");
 }
+inputBox.addEventListener("keyup", (e) => {
+  e.preventDefault();
+  if (e.keyCode === 13) {
+    showingCss();
+    errorMessage.style.display = "none";
+    weatherApi(inputBox.value);
+    console.log("Enter is pressed!");
+  }
+});
 
 searchBtn.addEventListener("click", () => {
   showingCss();
